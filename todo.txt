@@ -1,0 +1,2 @@
+for user check if that user exists and return token
+else register that user and return new jwt token
