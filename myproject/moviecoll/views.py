@@ -75,7 +75,7 @@ class Movies(APIView):
         title = 'movie '+str(time.time() % 1000)
         desc = 'movie desc '+str(time.time() % 1000000)
         mov = Movie.objects.create(title=title, description=desc)
-        return Response({'created_movie': mov.id}, status=status.HTTP_200_OK)
+        return Response({'created_movie': mov.id}, status=status.HTTP_201_CREATED)
 
 
 class UserCollection(APIView):
@@ -154,7 +154,7 @@ INNER JOIN moviecoll_collection ON mc.collection_id = moviecoll_collection.id
             response['collection_id'] = coll.id
             response['is_success'] = True
             response['message'] = 'created collection with id: ' + str(coll.id)
-            return Response(response, status=status.HTTP_200_OK)
+            return Response(response, status=status.HTTP_201_CREATED)
         except Exception as e:
             content = {'is_success': False,
                        'message': str(e)}
@@ -253,4 +253,4 @@ class RequestCountReset(APIView):
         from .middleware import CounterMiddleware
         counter = CounterMiddleware.reset_counter(self)
         content = {'message': 'request count reset successfully'}
-        return Response(content, status=status.HTTP_200_OK)
+        return Response(content, status=status.HTTP_201_CREATED)
